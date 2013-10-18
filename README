@@ -1,0 +1,9 @@
+DBC Challenge Friday October 18, 2013
+
+http://socrates.devbootcamp.com/challenges/391
+
+Start with Sinatra skeleton and add validation to user model including password length and appropriately formatted email.
+
+Display appropriate error messages to the user for invalid data.
+
+Add a field to store user access level (admin/student) and limit functionality to different user levels.
