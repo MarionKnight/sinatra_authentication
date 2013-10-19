@@ -7,3 +7,11 @@ Start with Sinatra skeleton and add validation to user model including password 
 Display appropriate error messages to the user for invalid data.
 
 Add a field to store user access level (admin/student) and limit functionality to different user levels.
+
+Notes: 
+
+Handy active record tips:
+
+rake console to get an active record console
+y Users.first to display the first record in nice formatting
+y Users.find(7) to display the 7th user
