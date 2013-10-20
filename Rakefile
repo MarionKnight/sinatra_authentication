@@ -1,6 +1,9 @@
 require 'rake'
 require 'rspec/core/rake_task'
 
+# Our local environment at DBC has dropdb linked into /usr/local/bin from 
+# postgresql/9.2.2/bin/dropdb
+
 
 require ::File.expand_path('../config/environment', __FILE__)
 
@@ -127,3 +130,18 @@ desc "Run the specs"
 RSpec::Core::RakeTask.new(:spec)
 
 task :default  => :specs
+
+# Could not get this custom raketask to drop the database if it exists 
+# task :all do
+#     puts "Dropping database #{DB_NAME} if it exists..."
+#     %x("dropdb --if-exists #{DB_NAME}")
+#     puts "Creating database #{DB_NAME} if it doesn't exist..."
+#     %x("createdb #{DB_NAME}")
+#     puts "Running migrations on database #{DB_NAME}"
+#     ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
+#     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+#     ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
+#       ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
+#     end
+#     require APP_ROOT.join('db', 'seeds.rb')
+# end

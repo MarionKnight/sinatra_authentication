@@ -15,3 +15,9 @@ Handy active record tips:
 rake console to get an active record console
 y Users.first to display the first record in nice formatting
 y Users.find(7) to display the 7th user
+
+HTML5 validation is already implemented in lines like this one from sign_up.erb:
+
+    <input type="email" name="user[email]" placeholder="e.g., me@example.com" >
+
+The input type being email will pop up a small window requiring the user to enter an email if it doesn't pass email criteria
