@@ -28,9 +28,16 @@ end
 
 post '/users' do
 	# puts params
+  # p params
+  # puts params["user"]
+  # puts params["user"]["name"]
+  User.create! ({
+    :name => params["user"]["name"],
+    :email => params["user"]["email"],
+    :password => params["user"]["password"]
+    })
+
 	# {"user"=>{"name"=>"fdsafd", "email"=>"asdf@fdas.com", "password"=>""}}
 	# long format for hash in a hash in ruby, which activerecord uses to create users
-  # User.create({name: params["user"]["name"], email: params["user"]["email"] })
-  # ToDo: (1) understand params, net tuts tutorial, sinatra docs 
-  #       (2) hashes review
+
 end
