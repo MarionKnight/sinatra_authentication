@@ -1,22 +1,28 @@
+enable :sessions
+
 get '/' do
+  session.clear
   # render home page
- #TODO: Show all users if user is signed in
   erb :index
+   #TODO: Show all users if user is signed in
 end
 
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
   erb :sign_in
+
 end
 
 post '/sessions' do
-  # sign-in
+  # sign-in .. 
+  erb :index
 end
 
 delete '/sessions/:id' do
   # sign-out -- invoked via AJAX
+  # copied the next line from stack overflow 4252800
+  session.clear
 end
 
 #----------- USERS -----------
@@ -38,12 +44,13 @@ post '/users' do
   # gets donefrom the /user route
   # User.create({:name => "Me", :email => "my_email", :password => "my_pass"})
   # As long as I use create! at least false validations give indication...
-  current_user = User.create({
+  the_current_user = User.create({
     :name => params["user"]["name"],
     :email => params["user"]["email"],
     :password => params["user"]["password"]
   })
-  puts current_user.errors.messages
+  puts the_current_user.errors.messages
+  erb :sign_in
 
   # The next stuff is me trying to get password length validations and 
   # validation error messages to show up in the route in a user friendly way...
