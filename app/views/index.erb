@@ -1,16 +1,9 @@
 <div class="container">
 
-<!-- Can't get it to display sessions info -->
-<!--   <p>Sessions is: <%=session[0] %></p> -->
 <% if current_user.nil? %>
-<li><a id="welcome" href="/sessions/new">Welcome</a></li>
-<p>Params is: <%=params %></p>
-<p>Email is: <%= params["email"] %></p>
-<p>Sessions message is: <%= session[:message] %></p>
-
+  <li><a id="welcome" href="/sessions/new">Please log in</a></li>
 <% else %>
-<p>Welcome User <%= current_user.name %>!!</p>
-<p><%= current_user %></p>
+  <p>Welcome User <%= current_user.name %>!!</p>
 <% end %>
 
   <%# TODO: 

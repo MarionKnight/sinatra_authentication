@@ -1,22 +1,41 @@
 enable :sessions
 
 get '/' do
-  session.clear
+  p "I made it home!"
+  p "I logged out"
+  p "Hi I'm user##{current_user}"
   # render home page
   erb :index
    #TODO: Show all users if user is signed in
+end
+
+get '/themostawesomepage' do
+  if current_user
+    "this is the most awesomest page"
+  else
+    redirect '/'
+  end
 end
 
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
   erb :sign_in
-
 end
 
 post '/sessions' do
+  p "*"*100
+  p params
   # sign-in .. 
-  erb :index
+  my_user = User.find_by_email( params[:email] )
+  # This is the line that logs the user in
+  # There is no checking yet...
+  session[:user_id] = my_user.id
+  p session
+  p "Hi I'm user##{current_user}"
+  # if @current_user
+  #   session[:user_id] = @current_user
+  redirect '/'
 end
 
 delete '/sessions/:id' do
