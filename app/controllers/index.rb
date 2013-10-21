@@ -2,8 +2,6 @@ enable :sessions
 
 get '/' do
   p "I made it home!"
-  p "I logged out"
-  p "Hi I'm user##{current_user}"
   # render home page
   erb :index
    #TODO: Show all users if user is signed in
@@ -26,15 +24,20 @@ end
 post '/sessions' do
   p "*"*100
   p params
-  # sign-in .. 
+  # sign-in .. todo: refactor: change my_user to @user
   my_user = User.find_by_email( params[:email] )
   # This is the line that logs the user in
   # There is no checking yet...
   session[:user_id] = my_user.id
   p session
   p "Hi I'm user##{current_user}"
-  # if @current_user
-  #   session[:user_id] = @current_user
+  # auth testing to start here...
+  p ":-).."*200
+  p my_user.password
+  p my_user.password_hash
+  p params[:password]
+  p my_user.password_hash == "111"
+  p my_user.password_hash == params[:password]
   redirect '/'
 end
 
@@ -73,15 +76,8 @@ post '/users' do
 
   # The next stuff is me trying to get password length validations and 
   # validation error messages to show up in the route in a user friendly way...
-  # But I gave up for now and need help...
-  # 
-  # user = User.new({
-  #   :name => params["user"]["name"],
-  #   :email => params["user"]["email"],
-  #   :password => params["user"]["password"]
-  # })
+  # I think I need to create some additional routes to display them nicely...
   # p user.errors.messages
-  # puts user.errors.messages
 
   # Found this code on internet but it doesn't work for me...
   # http://stackoverflow.com/questions/10150800/rails-how-to-validate-password-from-input-if-there-is-not-password-field-in-dat
