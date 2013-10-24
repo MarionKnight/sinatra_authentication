@@ -1,3 +1,5 @@
+require 'debugger'
+
 enable :sessions
 
 get '/' do
@@ -22,22 +24,10 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-  p "*"*100
   p params
-  # sign-in .. todo: refactor: change my_user to @user
-  my_user = User.find_by_email( params[:email] )
-  # This is the line that logs the user in
-  # There is no checking yet...
-  session[:user_id] = my_user.id
-  p session
-  p "Hi I'm user##{current_user}"
-  # auth testing to start here...
-  p ":-).."*200
-  p my_user.password
-  p my_user.password_hash
-  p params[:password]
-  p my_user.password_hash == "111"
-  p my_user.password_hash == params[:password]
+  p "*"*100
+  p User.authenticate(params).class
+  # session[:user_id] = my_user.id
   redirect '/'
 end
 
@@ -74,9 +64,6 @@ post '/users' do
   puts the_current_user.errors.messages
   erb :sign_in
 
-  # The next stuff is me trying to get password length validations and 
-  # validation error messages to show up in the route in a user friendly way...
-  # I think I need to create some additional routes to display them nicely...
   # p user.errors.messages
 
   # Found this code on internet but it doesn't work for me...
